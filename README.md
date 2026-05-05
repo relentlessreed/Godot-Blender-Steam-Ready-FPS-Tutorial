@@ -1,4 +1,4 @@
-# Untitled FPS Tutorial
+# Godot/Blender/Steam Ready FPS Tutorial
 
 A small 3D FPS made in Godot as a tutorial project. The goal is not to build the biggest game possible. The goal is to learn the full production path: Git, Godot, Blender asset creation, iteration, packaging, and eventually preparing a Steam build.
 
