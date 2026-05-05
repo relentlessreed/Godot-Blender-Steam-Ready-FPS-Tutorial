@@ -43,6 +43,20 @@ project.godot        Godot project configuration
 
 Keep commits small and named after the behavior they add.
 
+## Creating A Godot Projects Folder On Linux
+
+Before importing the project, create a folder to store Godot projects. This tutorial uses a `godot` folder inside the Linux home directory:
+
+```bash
+mkdir -p ~/godot
+```
+
+Then place or clone this repository inside that folder so the project path looks like this:
+
+```text
+~/godot/untitled
+```
+
 ## Importing The Project In Godot On Linux
 
 Use the project folder that contains `project.godot`. For example, if the repository is inside a `godot` folder in your Linux home directory, the path may look like this:
