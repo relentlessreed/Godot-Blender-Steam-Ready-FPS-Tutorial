@@ -43,6 +43,26 @@ project.godot        Godot project configuration
 
 Keep commits small and named after the behavior they add.
 
+## Importing The Project In Godot On Linux
+
+Use the project folder that contains `project.godot`. For example, if the repository is inside a `godot` folder in your Linux home directory, the path may look like this:
+
+```text
+~/godot/untitled
+```
+
+In Godot:
+
+1. Open Godot.
+2. Click **Import**.
+3. Click **Browse**.
+4. Navigate to the project folder.
+5. Select `project.godot`.
+6. Click **Open**.
+7. Click **Import & Edit**.
+
+If Godot asks which renderer to use, choose **Forward+** for modern desktop hardware. Choose **Compatibility** for older or weaker hardware.
+
 ## Tutorial Milestones
 
 1. Create the repo and project structure.
