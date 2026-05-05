@@ -47,6 +47,8 @@ For the full GitHub, SSH, repository setup, collaborator access, commit, push, a
 
 To rebuild the current playable demo step by step after the project is initialized and synced with GitHub, read [docs/build_current_demo.md](docs/build_current_demo.md).
 
+For a more detailed beginner walkthrough of every visible object in the current Godot demo, read [docs/visible_demo_walkthrough.md](docs/visible_demo_walkthrough.md).
+
 ## Creating A Godot Projects Folder On Linux
 
 Before importing the project, create a folder to store Godot projects. This tutorial uses a `godot` folder inside the Linux home directory:

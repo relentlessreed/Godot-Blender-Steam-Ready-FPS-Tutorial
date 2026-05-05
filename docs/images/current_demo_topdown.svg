@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Current Demo Top-Down Layout</title>
+  <desc id="desc">A top-down diagram showing the player near the front of a rectangular arena and three targets arranged left, center, and right.</desc>
+  <rect width="900" height="560" fill="#f4f4f2"/>
+  <rect x="120" y="60" width="660" height="420" fill="#2e3335" stroke="#151819" stroke-width="4"/>
+  <text x="450" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#222">Target Range Layout</text>
+  <circle cx="450" cy="390" r="24" fill="#4f8ad9" stroke="#173b6d" stroke-width="3"/>
+  <path d="M450 360 L432 330 L468 330 Z" fill="#4f8ad9" stroke="#173b6d" stroke-width="3"/>
+  <text x="450" y="435" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Player</text>
+  <rect x="235" y="175" width="72" height="72" fill="#f2332a" stroke="#7b1712" stroke-width="4" transform="rotate(-25 271 211)"/>
+  <rect x="414" y="125" width="72" height="72" fill="#f2332a" stroke="#7b1712" stroke-width="4"/>
+  <rect x="593" y="175" width="72" height="72" fill="#f2332a" stroke="#7b1712" stroke-width="4" transform="rotate(25 629 211)"/>
+  <text x="270" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">TargetA</text>
+  <text x="450" y="108" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">TargetB</text>
+  <text x="630" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">TargetC</text>
+  <line x1="450" y1="330" x2="270" y2="235" stroke="#d6d9da" stroke-width="3" stroke-dasharray="8 8"/>
+  <line x1="450" y1="330" x2="450" y2="197" stroke="#d6d9da" stroke-width="3" stroke-dasharray="8 8"/>
+  <line x1="450" y1="330" x2="630" y2="235" stroke="#d6d9da" stroke-width="3" stroke-dasharray="8 8"/>
+  <text x="450" y="512" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#333">Ground size: 24 x 24 units. Player starts at 0, 1.2, 6. Targets sit ahead at left, center, and right.</text>
+</svg>
