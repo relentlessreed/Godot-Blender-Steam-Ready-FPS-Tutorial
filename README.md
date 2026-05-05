@@ -63,6 +63,34 @@ In Godot:
 
 If Godot asks which renderer to use, choose **Forward+** for modern desktop hardware. Choose **Compatibility** for older or weaker hardware.
 
+## Importing From Windows Godot When The Project Is In WSL
+
+If you are running the Windows version of Godot but the project files are inside WSL/Linux, paths like `~/godot/untitled` or `/home/...` may not work in Godot's file picker. Use the WSL network path instead.
+
+The path usually follows this pattern:
+
+```text
+//wsl.localhost/Ubuntu/home/<linux-user>/godot/untitled
+```
+
+On some Windows setups, this older form may also work:
+
+```text
+//wsl$/Ubuntu/home/<linux-user>/godot/untitled
+```
+
+In Godot:
+
+1. Click **Import**.
+2. Click **Browse**.
+3. Paste the WSL path into the file picker path bar.
+4. Replace `<linux-user>` with your Linux username.
+5. Select `project.godot`.
+6. Click **Open**.
+7. Click **Import & Edit**.
+
+Use the WSL path only when Godot is running on Windows and the project is stored inside WSL.
+
 ## Tutorial Milestones
 
 1. Create the repo and project structure.
