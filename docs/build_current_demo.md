@@ -84,6 +84,8 @@ Fullscreen testing is useful for FPS games because mouse capture and camera feel
 
 Open **Project > Project Settings > Input Map**.
 
+Best practice: connect a controller now if controller playability is part of the goal. Add keyboard/mouse and controller bindings at the same time so both input paths stay equal.
+
 Create these actions:
 
 ```text
@@ -91,6 +93,10 @@ move_forward
 move_back
 move_left
 move_right
+look_left
+look_right
+look_up
+look_down
 jump
 fire
 ui_cancel
@@ -99,16 +105,20 @@ ui_cancel
 Bind them like this:
 
 ```text
-move_forward  W
-move_back     S
-move_left     A
-move_right    D
-jump          Space
-fire          Left Mouse Button
-ui_cancel     Escape
+move_forward  W                  Left stick up
+move_back     S                  Left stick down
+move_left     A                  Left stick left
+move_right    D                  Left stick right
+look_left     Right stick left
+look_right    Right stick right
+look_up       Right stick up
+look_down     Right stick down
+jump          Space              South face button
+fire          Left Mouse Button  Right trigger or right shoulder
+ui_cancel     Escape             Start/Menu
 ```
 
-These actions let scripts ask for game intent, such as `move_forward`, instead of checking raw keyboard keys everywhere.
+These actions let scripts ask for game intent, such as `move_forward`, instead of checking raw keyboard keys or raw controller axes everywhere.
 
 ## Create The Player Script
 
@@ -124,7 +134,8 @@ The player script should:
 - Capture the mouse when the game starts.
 - Rotate the body left and right from mouse movement.
 - Rotate the camera head up and down from mouse movement.
-- Use `Input.get_vector()` for WASD movement.
+- Rotate the camera from controller right-stick movement.
+- Use `Input.get_vector()` for keyboard and controller movement.
 - Apply gravity and jumping.
 - Use a `RayCast3D` for hitscan firing.
 - Emit a signal when a target is hit.
@@ -139,6 +150,7 @@ signal target_hit
 @export var move_speed := 7.0
 @export var jump_velocity := 4.5
 @export var mouse_sensitivity := 0.0025
+@export var controller_look_sensitivity := 3.0
 @export var gravity := 18.0
 @export var fire_range := 60.0
 
@@ -158,13 +170,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if event.is_action_pressed("fire"):
-		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		else:
-			_fire()
-
 func _physics_process(delta: float) -> void:
+	_apply_controller_look(delta)
+
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)).normalized()
 
@@ -176,7 +184,22 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = jump_velocity
 
+	if Input.is_action_just_pressed("fire"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		else:
+			_fire()
+
 	move_and_slide()
+
+func _apply_controller_look(delta: float) -> void:
+	var look_dir := Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	if look_dir.is_zero_approx():
+		return
+
+	rotate_y(-look_dir.x * controller_look_sensitivity * delta)
+	head.rotate_x(-look_dir.y * controller_look_sensitivity * delta)
+	head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85.0), deg_to_rad(85.0))
 
 func _fire() -> void:
 	raycast.force_raycast_update()
@@ -381,15 +404,15 @@ Set the main scene if it is not already set:
 
 ## Playtest The Demo
 
-Press **Play**.
+Connect a controller, then press **Play**.
 
 Check this behavior:
 
-- `WASD` moves the player.
-- Mouse movement looks around.
-- `Space` jumps.
-- Left click fires.
-- `Esc` releases the mouse.
+- `WASD` and left stick both move the player.
+- Mouse movement and right stick both look around.
+- `Space` and the controller south face button both jump.
+- Left click, right trigger, and right shoulder can fire.
+- `Esc` and Start/Menu release the mouse.
 - Targets change color when hit.
 - The HUD count increases only once per target.
 

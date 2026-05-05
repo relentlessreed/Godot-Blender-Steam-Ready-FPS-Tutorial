@@ -21,6 +21,8 @@ Core loop:
 - Build placeholder gameplay first, then replace placeholders with Blender assets.
 - Do not commit generated Godot cache folders such as `.godot/`.
 - Keep asset source files, exported models, and imported Godot resources separate.
+- If controller playability is intended, keep a controller connected while building and testing input.
+- Every input tutorial step should document keyboard/mouse and controller bindings together.
 
 ## First Vertical Slice
 
@@ -29,14 +31,14 @@ The first vertical slice is already started:
 - A main scene
 - A player scene
 - A reusable target scene
-- FPS movement and mouse look
+- FPS movement and look for keyboard/mouse and controller
 - Hitscan firing through a raycast
 - Basic HUD score
 
 Definition of done:
 
 - The game starts from `scenes/main/main.tscn`.
-- The player can move around a 3D arena.
+- The player can move, look, jump, and fire with keyboard/mouse and controller.
 - The player can hit all targets.
 - The repo has clear docs for what each folder is for.
 

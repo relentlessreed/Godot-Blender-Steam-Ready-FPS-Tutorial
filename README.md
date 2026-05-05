@@ -6,12 +6,25 @@ A small 3D FPS made in Godot as a tutorial project. The goal is not to build the
 
 The first playable slice is a simple target range:
 
-- WASD movement
-- Mouse look
-- Space to jump
-- Left click to fire
-- Escape to release the mouse
+- Keyboard/mouse movement, looking, jumping, firing, and mouse release
+- Controller movement, looking, jumping, firing, and mouse release
 - Three targets to hit in a small 3D arena
+
+## Controls
+
+Best practice: if the game is intended to support controller play, keep a controller connected while setting up and testing input. Do not wait until the end of development to test controller support. Keyboard/mouse and controller should be tested together whenever input handling changes.
+
+Current controls:
+
+| Action | Keyboard/Mouse | Controller |
+| --- | --- | --- |
+| Move | `WASD` | Left stick |
+| Look | Mouse | Right stick |
+| Jump | `Space` | South face button, such as Xbox `A` or PlayStation `Cross` |
+| Fire | Left mouse button | Right trigger or right shoulder |
+| Release/capture mouse | `Esc` / left click | Start/Menu to release, fire to capture again |
+
+Moving forward, every tutorial step that creates or changes input should explain both keyboard/mouse and controller bindings.
 
 ## Toolchain
 
@@ -149,18 +162,23 @@ Use the WSL path only when Godot is running on Windows and the project is stored
 
 ## First Playtest
 
-After importing the project, run the first playable scene:
+After importing the project, connect a controller if this game should support controller play. Then run the first playable scene:
 
 1. Open Godot.
 2. Open `scenes/main/main.tscn`.
 3. Press **Play**.
 4. Confirm that `WASD` moves the player.
-5. Confirm that the mouse looks around.
-6. Confirm that `Space` jumps.
-7. Confirm that left click shoots.
-8. Confirm that targets change color when hit.
-9. Confirm that the HUD target count increases.
-10. Press `Esc` to release the mouse.
+5. Confirm that the left stick moves the player.
+6. Confirm that the mouse looks around.
+7. Confirm that the right stick looks around.
+8. Confirm that `Space` jumps.
+9. Confirm that the controller south face button jumps.
+10. Confirm that left click shoots.
+11. Confirm that right trigger or right shoulder shoots.
+12. Confirm that targets change color when hit.
+13. Confirm that the HUD target count increases.
+14. Press `Esc` to release the mouse.
+15. Press the controller Start/Menu button to release the mouse.
 
 If the scene runs correctly, the next tutorial step is to create the first proper FPS arena blockout and commit that work on a feature branch.
 
@@ -200,7 +218,7 @@ The demo contains:
 - Three red targets
 - Targets that turn green when hit
 - A HUD objective showing `Targets: 0 / 3`
-- WASD movement, mouse look, jump, shooting, and mouse release
+- Keyboard/mouse and controller movement, look, jump, shooting, and mouse release
 
 Reference diagrams:
 
@@ -446,29 +464,35 @@ This creates the small visible blaster in the lower-right of the screen. It is t
 
 ### 12. Add Input Actions
 
+Connect a controller before setting up controller input. Godot can add controller events from the Input Map by listening for the physical button, trigger, or stick movement.
+
 Open:
 
 ```text
 Project > Project Settings > Input Map
 ```
 
-Add:
+Add these actions and bind both keyboard/mouse and controller input:
 
 ```text
-move_forward  W
-move_back     S
-move_left     A
-move_right    D
-jump          Space
-fire          Left Mouse Button
-ui_cancel     Escape
+move_forward  W                  Left stick up
+move_back     S                  Left stick down
+move_left     A                  Left stick left
+move_right    D                  Left stick right
+look_left     Right stick left
+look_right    Right stick right
+look_up       Right stick up
+look_down     Right stick down
+jump          Space              South face button
+fire          Left Mouse Button  Right trigger or right shoulder
+ui_cancel     Escape             Start/Menu
 ```
 
 These names are used by the player script so gameplay code does not need to care about raw key codes.
 
 ### 13. Make The Player Move
 
-The movement script reads WASD:
+The movement script reads the same actions for keyboard and controller:
 
 ```gdscript
 var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -489,7 +513,9 @@ elif Input.is_action_just_pressed("jump"):
 
 `move_and_slide()` applies the final movement.
 
-### 14. Make Mouse Look Work
+Because the left stick is bound to the same movement actions as `WASD`, the script does not need a separate controller movement path.
+
+### 14. Make Mouse And Controller Look Work
 
 The script captures the mouse when play starts:
 
@@ -513,6 +539,20 @@ if event.is_action_pressed("ui_cancel"):
 ```
 
 Horizontal mouse movement rotates the whole player. Vertical mouse movement rotates only the head/camera.
+
+Controller look uses the right-stick actions:
+
+```gdscript
+var look_dir := Input.get_vector("look_left", "look_right", "look_up", "look_down")
+if look_dir.is_zero_approx():
+	return
+
+rotate_y(-look_dir.x * controller_look_sensitivity * delta)
+head.rotate_x(-look_dir.y * controller_look_sensitivity * delta)
+head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85.0), deg_to_rad(85.0))
+```
+
+The controller look code uses `delta` so stick aiming stays consistent across frame rates.
 
 ### 15. Create The Target Scene
 
@@ -784,13 +824,14 @@ Expected result:
 - The gray arena floor is visible.
 - The small weapon preview is visible in the lower-right.
 - The HUD shows `Targets: 0 / 3`.
-- WASD moves the player.
-- Mouse movement looks around.
-- Space jumps.
-- Left click fires.
+- `WASD` and left stick both move the player.
+- Mouse movement and right stick both look around.
+- `Space` and the controller south face button both jump.
+- Left click, right trigger, and right shoulder can fire.
 - Red targets turn green when hit.
 - The HUD reaches `Targets: 3 / 3`.
-- Escape releases the mouse.
+- `Esc` and Start/Menu release the mouse.
+- After mouse release, firing captures the mouse again.
 
 ### 25. Commit And Push The Demo
 
@@ -836,12 +877,14 @@ Capture:
 | `02_input_map.png` | Project Settings > Input Map |
 | `03_player_scene_tree.png` | Player scene node tree |
 | `04_player_camera_weapon.png` | Camera view with weapon preview |
-| `05_target_scene_tree.png` | Target scene node tree |
-| `06_main_scene_tree.png` | Main scene node tree |
-| `07_three_targets_editor.png` | Editor viewport showing three targets |
-| `08_first_playtest.png` | Running game with HUD visible |
-| `09_target_hit_green.png` | Running game after one target is hit |
-| `10_all_targets_complete.png` | Running game after all targets are hit |
+| `05_controller_bindings.png` | Input Map showing controller bindings |
+| `06_target_scene_tree.png` | Target scene node tree |
+| `07_main_scene_tree.png` | Main scene node tree |
+| `08_three_targets_editor.png` | Editor viewport showing three targets |
+| `09_keyboard_mouse_playtest.png` | Running game with keyboard/mouse controls tested |
+| `10_controller_playtest.png` | Running game with controller controls tested |
+| `11_target_hit_green.png` | Running game after one target is hit |
+| `12_all_targets_complete.png` | Running game after all targets are hit |
 
 ### Visible Objects Summary
 
@@ -856,7 +899,7 @@ Capture:
 | Firing ray | `FireRay` | No | Detects what the player shoots |
 | Targets | `TargetA`, `TargetB`, `TargetC` | Yes | Main shooting objective |
 | HUD label | `StatusLabel` | Yes | Shows target progress |
-| Player script | `player_controller.gd` | Through behavior | Movement, mouse look, shooting |
+| Player script | `player_controller.gd` | Through behavior | Keyboard/mouse and controller movement, look, jump, and shooting |
 | Target script | `target.gd` | Through behavior | Red-to-green hit feedback |
 | Game script | `game.gd` | Through HUD | Tracks objective progress |
 
