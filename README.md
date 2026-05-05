@@ -45,6 +45,8 @@ Keep commits small and named after the behavior they add. When another person he
 
 For the full GitHub, SSH, repository setup, collaborator access, commit, push, and branch workflow, read [docs/git_workflow.md](docs/git_workflow.md).
 
+To rebuild the current playable demo step by step after the project is initialized and synced with GitHub, read [docs/build_current_demo.md](docs/build_current_demo.md).
+
 ## Creating A Godot Projects Folder On Linux
 
 Before importing the project, create a folder to store Godot projects. This tutorial uses a `godot` folder inside the Linux home directory:
