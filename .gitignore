@@ -1,0 +1,13 @@
+# Godot 4 generated files
+.godot/
+
+# Imported asset artifacts
+*.import
+
+# Export output
+export/
+build/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
