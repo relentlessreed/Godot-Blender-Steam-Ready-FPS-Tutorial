@@ -147,6 +147,45 @@ In Godot:
 
 Use the WSL path only when Godot is running on Windows and the project is stored inside WSL.
 
+## First Playtest
+
+After importing the project, run the first playable scene:
+
+1. Open Godot.
+2. Open `scenes/main/main.tscn`.
+3. Press **Play**.
+4. Confirm that `WASD` moves the player.
+5. Confirm that the mouse looks around.
+6. Confirm that `Space` jumps.
+7. Confirm that left click shoots.
+8. Confirm that targets change color when hit.
+9. Confirm that the HUD target count increases.
+10. Press `Esc` to release the mouse.
+
+If the scene runs correctly, the next tutorial step is to create the first proper FPS arena blockout and commit that work on a feature branch.
+
+If the scene does not run, read the Godot error message and fix that before adding new features. Keeping the project playable is more important than adding more content quickly.
+
+## Fullscreen Test Runs
+
+This project is configured to start test runs in fullscreen by default.
+
+The setting lives in `project.godot`:
+
+```text
+display/window/size/mode=3
+```
+
+In the Godot editor, the same setting can be changed here:
+
+1. Open **Project**.
+2. Open **Project Settings**.
+3. Search for `window/size/mode`.
+4. Set the window mode to **Fullscreen**.
+5. Close Project Settings and press **Play** again.
+
+Fullscreen is useful for FPS testing because mouse capture, aiming, and camera feel are easier to judge in the same screen mode a player would use.
+
 ## Tutorial Milestones
 
 1. Create the repo and project structure.
