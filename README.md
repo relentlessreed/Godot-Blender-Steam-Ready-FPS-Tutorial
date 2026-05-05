@@ -59,6 +59,26 @@ Then place or clone this repository inside that folder so the project path looks
 ~/godot/untitled
 ```
 
+## Creating A Godot Projects Folder On Mac
+
+On macOS, open **Terminal** and create the same kind of project folder in your home directory:
+
+```bash
+mkdir -p ~/godot
+```
+
+Then place or clone this repository inside that folder so the project path looks like this:
+
+```text
+~/godot/untitled
+```
+
+In Finder, the same location is:
+
+```text
+Macintosh HD/Users/<mac-user>/godot/untitled
+```
+
 ## Importing The Project In Godot On Linux
 
 Use the project folder that contains `project.godot`. For example, if the repository is inside a `godot` folder in your Linux home directory, the path may look like this:
@@ -78,6 +98,26 @@ In Godot:
 7. Click **Import & Edit**.
 
 If Godot asks which renderer to use, choose **Forward+** for modern desktop hardware. Choose **Compatibility** for older or weaker hardware.
+
+## Importing The Project In Godot On Mac
+
+Use the project folder that contains `project.godot`. If the repository is inside a `godot` folder in your macOS home directory, the Terminal path looks like this:
+
+```text
+~/godot/untitled
+```
+
+In Godot:
+
+1. Open Godot.
+2. Click **Import**.
+3. Click **Browse**.
+4. Navigate to your home folder, then open `godot/untitled`.
+5. Select `project.godot`.
+6. Click **Open**.
+7. Click **Import & Edit**.
+
+If macOS asks for file or folder permission, allow Godot to access the project folder. If Godot asks which renderer to use, choose **Forward+** for modern Apple Silicon or recent Intel Macs. Choose **Compatibility** if Forward+ has graphics issues.
 
 ## Importing From Windows Godot When The Project Is In WSL
 

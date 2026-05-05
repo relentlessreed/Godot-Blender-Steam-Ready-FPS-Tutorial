@@ -21,6 +21,18 @@ sudo apt update
 sudo apt install git
 ```
 
+On macOS, first check whether Git is already available:
+
+```bash
+git --version
+```
+
+If macOS asks to install command line developer tools, accept the prompt. You can also install Git with Homebrew:
+
+```bash
+brew install git
+```
+
 Check that Git is installed:
 
 ```bash
@@ -79,7 +91,7 @@ If GitHub says you successfully authenticated, SSH is working. GitHub may also s
 
 ## Create The Local Project Folder
 
-Create a place for Godot projects:
+Create a place for Godot projects on Linux, WSL, or macOS:
 
 ```bash
 mkdir -p ~/godot
@@ -100,6 +112,12 @@ project.godot
 ```
 
 Once `project.godot` exists, the folder is ready to become a Git repository.
+
+On macOS, the same folder can also be found in Finder under:
+
+```text
+Macintosh HD/Users/<mac-user>/godot/untitled
+```
 
 ## Initialize The Git Repo
 
