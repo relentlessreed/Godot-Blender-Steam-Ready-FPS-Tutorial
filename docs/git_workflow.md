@@ -194,6 +194,58 @@ git push
 
 We push to GitHub because it creates an off-computer backup, makes the project visible from another machine, and prepares the repo for collaboration. If the computer breaks, the pushed commits still exist on GitHub.
 
+## Add A Trusted Collaborator
+
+A collaborator is another GitHub user who can contribute to the repository. For a personal GitHub repository, GitHub lets you invite collaborators from the repository settings. Only invite someone you trust, because collaborators can usually push code, open pull requests, manage issues, and affect the project history depending on the permissions GitHub gives them.
+
+Before inviting someone:
+
+- Make sure they have their own GitHub account.
+- Ask for their GitHub username.
+- Ask them to enable two-factor authentication.
+- Agree that feature work should happen on branches.
+- Agree that `main` should stay playable and stable.
+- Do not share your password, SSH private key, personal access tokens, or GitHub recovery codes.
+
+To invite a collaborator on GitHub:
+
+1. Open the repository page on GitHub.
+2. Click **Settings**.
+3. In the access area, click **Collaborators** or **Collaborators and teams**.
+4. Click **Add people**.
+5. Search for the person's GitHub username or email.
+6. Select the correct person.
+7. Click the button to add that person to the repository.
+8. Wait for them to accept the invitation.
+
+After they accept, have them clone the repo with SSH:
+
+```bash
+git clone git@github.com:<github-username>/<repo-name>.git
+```
+
+For a small tutorial repo, the simplest rule is:
+
+```text
+Do not push unfinished experiments directly to main.
+```
+
+Instead, collaborators should create a branch:
+
+```bash
+git switch -c feature/example-feature
+```
+
+Then they commit and push that branch:
+
+```bash
+git push -u origin feature/example-feature
+```
+
+On GitHub, they can open a pull request. The project owner reviews the changes, checks that the game still runs, then merges into `main`.
+
+If a collaborator no longer needs access, remove them from the same collaborator settings area. Removing old access is normal project maintenance, not a personal statement.
+
 ## Daily Commands
 
 Check what changed:

@@ -41,9 +41,9 @@ project.godot        Godot project configuration
 5. Commit the working change with Git.
 6. Push to GitHub.
 
-Keep commits small and named after the behavior they add.
+Keep commits small and named after the behavior they add. When another person helps on the project, add them as a GitHub collaborator only if you trust them with write access and agree on a branch workflow first.
 
-For the full GitHub, SSH, repository setup, commit, push, and branch workflow, read [docs/git_workflow.md](docs/git_workflow.md).
+For the full GitHub, SSH, repository setup, collaborator access, commit, push, and branch workflow, read [docs/git_workflow.md](docs/git_workflow.md).
 
 ## Creating A Godot Projects Folder On Linux
 
