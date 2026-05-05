@@ -7,6 +7,10 @@
 # Export output
 export/
 build/
+*.pck
+*.exe
+*.x86_64
+*.app/
 
 # OS/editor noise
 .DS_Store

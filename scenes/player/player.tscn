@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq8uqqx3ft1yq"]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_0n3hc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xosuj"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pblj3"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.45
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_0n3hc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xosuj")
+
+[node name="Head" type="Node3D" parent="."]
+position = Vector3(0, 0.75, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
+fov = 75.0
+
+[node name="FireRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -60)
+
+[node name="BlasterPreview" type="MeshInstance3D" parent="Head/Camera3D"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.32, -0.22, -0.55)
+mesh = SubResource("CylinderMesh_pblj3")
